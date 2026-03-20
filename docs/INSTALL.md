@@ -1,17 +1,23 @@
 # INSTALL
 
-`khon-party` is designed for a simple install path:
+`khon-party` is designed for a simple install path.
 
-1. Open this repo.
-2. Make the scripts executable.
-3. Run `./install.sh`.
-4. Restart Claude Code.
-5. Use `/khon-party`.
+## Recommended install
 
-## Quick install
+Install without cloning the repo:
 
 ```bash
-chmod +x install.sh verify-install.sh uninstall.sh
+curl -fsSL https://raw.githubusercontent.com/Ima8/khon-party/main/install-remote.sh | bash
+```
+
+Then restart Claude Code and use `/khon-party`.
+
+## Source install
+
+If you want to edit or rebuild the command locally:
+
+```bash
+chmod +x install.sh verify-install.sh uninstall.sh install-remote.sh
 ./install.sh
 ```
 

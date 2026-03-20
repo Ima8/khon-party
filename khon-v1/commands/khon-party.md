@@ -327,10 +327,6 @@ Use this output contract:
 - Name (Role — short trait) — [Localized Governance/Risk angle label]: [Localized why-this-person-is-here text]
 - Name (Role — short trait) — [Localized Challenge/Skeptic angle label]: [Localized why-this-person-is-here text]
 
-## [Localized lenses heading, e.g. Thai: `มุมคิดที่หยิบมาใช้` / English: `Thinking Lenses Used`]
-| [Localized module label] | [Localized selection-method label] | [Localized relevance label] |
-|---|---|---|
-
 ## [Localized idea clusters heading, e.g. Thai: `ประเด็นที่แตกออกมา` / English: `Emerging Threads`]
 - [Localized cluster summary]
 - [Localized cluster summary]
@@ -348,8 +344,9 @@ Name (Role — short trait): ...
 Name (Role — short trait): ...
 
 ## [Localized governance heading, e.g. `เช็กความเสี่ยงและเงื่อนไข`]
-| ข้อเสนอ | สถานะ | เหตุผล | กรอบที่ปลอดภัยกว่า / เงื่อนไขกำกับ |
-|---|---|---|---|
+- [Localized risk or safeguard summary]
+- [Localized reason or caveat]
+- [Localized safer framing, guardrail, or condition]
 
 ## [Localized landing heading, e.g. `บทสรุปที่ตกผลึก`]
 ### [Localized agreements heading, e.g. `มุมที่เห็นตรงกัน`]
@@ -376,8 +373,8 @@ Name (Role — short trait): ...
 Output-style rules:
 - Keep the prompt framework in English, but render the final user-facing answer in the user's language.
 - Match the final answer language to the user's prompt language. Do not default to Thai unless the user is writing in Thai.
-- For Thai output, prefer headings like `สรุปโจทย์`, `คนในวงสนทนา`, `มุมคิดที่หยิบมาใช้`, `ประเด็นที่แตกออกมา`, `ไอเดียที่ควรหยิบมาคิดต่อ`, `ข้อถกเถียง`, `เช็กความเสี่ยงและเงื่อนไข`, `บทสรุปที่ตกผลึก`, `มุมที่เห็นตรงกัน`, `มุมที่ยังเห็นต่าง`, `ข้อเสนอแนะ`, and `ขั้นถัดไป` instead of stiff direct translations such as `Objective`, `Roster`, `Lenses`, or `Governance`.
-- For English output, prefer natural headings such as `Problem Summary`, `Voices in the Room`, `Thinking Lenses Used`, `Emerging Threads`, `Ideas Worth Carrying Forward`, `Debate`, `Risk Check`, `What We Landed On`, `Shared Ground`, `Open Disagreements`, `Recommendation`, and `Next Steps`.
+- For Thai output, prefer headings like `สรุปโจทย์`, `คนในวงสนทนา`, `ประเด็นที่แตกออกมา`, `ไอเดียที่ควรหยิบมาคิดต่อ`, `ข้อถกเถียง`, `เช็กความเสี่ยงและเงื่อนไข`, `บทสรุปที่ตกผลึก`, `มุมที่เห็นตรงกัน`, `มุมที่ยังเห็นต่าง`, `ข้อเสนอแนะ`, and `ขั้นถัดไป` instead of stiff direct translations such as `Objective`, `Roster`, or `Governance`.
+- For English output, prefer natural headings such as `Problem Summary`, `Voices in the Room`, `Emerging Threads`, `Ideas Worth Carrying Forward`, `Debate`, `Risk Check`, `What We Landed On`, `Shared Ground`, `Open Disagreements`, `Recommendation`, and `Next Steps`.
 - In zero-config mode, make the 6 required balance-first angles visibly explicit in the roster section unless the user explicitly overrides personas.
 - Localize every user-facing section heading and micro-label into the user's language. Avoid mixed-language headings unless the user explicitly wants that.
 - Reduce unexplained jargon in the active output language. If an English term is necessary in Thai output, explain it in Thai on first use before using the English shorthand again.

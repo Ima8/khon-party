@@ -24,6 +24,23 @@ Confirm the runtime file includes:
 
 ## 2. Install verification
 
+### Remote one-command install
+
+Run:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Ima8/khon-party/main/install-remote.sh | bash
+```
+
+Expected result:
+
+- the runtime file is downloaded from GitHub
+- the downloaded file is validated before install
+- `~/.claude/commands/khon-party.md` exists
+- the installed file is validated again
+
+### Source install
+
 Run:
 
 ```bash

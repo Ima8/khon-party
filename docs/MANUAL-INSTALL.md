@@ -1,6 +1,6 @@
 # MANUAL-INSTALL
 
-Use this when you do not want to run the installer script.
+Use this when you do not want to run the installer script or the one-command remote installer.
 
 ## Manual steps
 

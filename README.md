@@ -1,87 +1,180 @@
 # khon-party
 
-A zero-config Claude Code command for running a structured multi-perspective party-style analysis.
+Turn one Claude Code prompt into a real brainstorm-then-debate session.
 
-`khon-party` is a standalone, installable command for Claude Code that turns a single prompt into:
-- dynamic persona selection
-- dynamic cognitive-module selection
-- a visible party-style discussion
-- governance-aware synthesis
-- safe next-step recommendations
+`/khon-party` helps you widen the idea space first, pressure-test the strongest options, and land on a practical recommendation — inside Claude Code, with no setup wizard and no prompt gymnastics.
 
-The UX goal is simple:
-1. Install once
-2. Restart Claude Code
-3. Use `/khon-party <your prompt>`
+**What makes it useful:**
+- one command, no config
+- visible multi-perspective discussion instead of a single narrow frame
+- balance-first default across 6 angles: business, market, research, execution, risk, and skepticism
+- Thai or English output that follows the user's prompt language
+- governance-aware synthesis with practical next steps
 
-## Why this exists
+## Install in one command
 
-This project is designed for cases where you want the spirit of BMAD Party Mode, but with a simpler and more direct user experience for Claude Code:
-- no first-run setup
-- no required config editing
-- no command suite to memorize
-- one command that infers from prompt and context
-
-## Quick install
-
-From inside this repo:
+Recommended for normal users:
 
 ```bash
-chmod +x install.sh verify-install.sh uninstall.sh
-./install.sh
+curl -fsSL https://raw.githubusercontent.com/Ima8/khon-party/main/install-remote.sh | bash
 ```
 
-Then restart Claude Code.
+Then:
+1. restart Claude Code
+2. type `/khon-party ...`
+3. start using it immediately
 
-## Quick use
+Example:
 
 ```text
-/khon-party วิเคราะห์แผนนี้ในมุม dev + biz + governance
+/khon-party Should we launch this product now, and how should we position it?
 ```
 
-Or let it use the conversation context:
+```text
+/khon-party ช่วยคิดแผนเปิดตัวฟีเจอร์นี้แบบ cross-functional
+```
+
+## What it is good for
+
+Use `/khon-party` when one normal prompt feels too narrow.
+
+It works especially well for:
+- architecture trade-offs
+- product strategy and launch planning
+- prioritization and roadmap debates
+- cross-functional decisions with many stakeholders
+- risky recommendations that need pressure-testing before action
+
+## What you get back
+
+Instead of one flat answer, `/khon-party` gives you a more structured outcome:
+- a quick framing of the real problem
+- a visible panel of voices with different angles
+- broader idea generation before the answer collapses too early
+- a sharp party-style discussion with trade-offs and disagreement
+- a separate risk check
+- a friendlier synthesis with practical next steps
+
+## Why people use it
+
+Most prompting collapses into one frame too early.
+
+`/khon-party` is designed to avoid that by default:
+- **brainstorm first** so the idea space stays broad
+- **debate second** so strong options get challenged
+- **balance first** so the answer does not lean only toward one viewpoint
+- **governance before recommendation** so risky advice gets reframed instead of pushed blindly
+
+## Why it feels different
+
+`khon-party` is not trying to be a big command suite.
+
+It is intentionally narrow in scope:
+- one command
+- strong defaults
+- optional advanced controls
+- no first-run configuration
+- no need to manually assemble personas or thinking frameworks unless you want to
+
+## Quick examples
+
+Use it with a direct prompt:
+
+```text
+/khon-party วิเคราะห์ระบบนี้ในมุม dev + biz + governance
+```
+
+Use it with the current conversation context:
 
 ```text
 /khon-party
 ```
 
-## What the command does
+Force personas if you want tighter control:
+
+```text
+/khon-party [personas=architect,operator,skeptic,governor] วิเคราะห์ระบบนี้
+```
+
+Force modules if you want a specific style of pressure:
+
+```text
+/khon-party [modules=cog.role_playing,cog.six_thinking_hats,cog.black_swan] เปรียบเทียบ 3 ทางเลือกนี้
+```
+
+See [`docs/EXAMPLES.md`](docs/EXAMPLES.md) for more.
+
+## How it works
 
 `/khon-party` will:
-1. infer the real problem from your prompt/context
-2. derive 3-5 relevant personas automatically
-3. choose a dynamic subset of cognitive modules
-4. run a visible party-style discussion with sharp back-and-forth
-5. apply a governance gate to recommendations
-6. return a practical, friendlier synthesis
+1. infer the real objective from your prompt and recent context
+2. widen the idea space before locking into one recommendation
+3. assemble a balance-first panel by default across business/value, market/customer, research/uncertainty, execution/system, governance/risk, and challenge/skeptic
+4. choose a dynamic subset from the embedded 21-module KHON prompt pack
+5. run a visible party-style discussion with short, reactive turns
+6. apply a governance gate before the final recommendation
+7. return a practical synthesis with next steps
 
-## Full-build authoring model
+## Requirements
 
-The installed runtime is still one self-contained file:
+For the recommended remote install path:
+- Claude Code installed and working
+- macOS, Linux, or WSL with `bash`
+- `curl` or `wget`
+- permission to write to `~/.claude/commands/`
 
-```text
-khon-v1/commands/khon-party.md
-```
+For local/source install:
+- everything above
+- `python3`
 
-But the editable source now lives under:
+This is a Claude Code custom command, not an npm package or an IDE marketplace extension.
 
-```text
-src/
-```
+## Install from source
 
-This means you can maintain:
-- command fragments in `src/command/`
-- persona cards in `src/prompts/personas/`
-- full curated KHON cognitive module prompts in `src/prompts/modules/`
-- debate/governance/synthesis templates in `src/prompts/templates/`
-
-The runtime is regenerated by:
+Use this if you want to edit the source, rebuild the runtime, or contribute to the repo.
 
 ```bash
-python3 scripts/build_runtime.py
+git clone https://github.com/Ima8/khon-party.git
+cd khon-party
+chmod +x install.sh verify-install.sh uninstall.sh install-remote.sh
+./install.sh
 ```
 
-`install.sh` runs that build step automatically before installation.
+What `install.sh` does:
+1. builds the generated runtime from `src/`
+2. copies the final command to `~/.claude/commands/khon-party.md`
+3. backs up an older installed `khon-party` command if one already exists
+4. runs `./verify-install.sh`
+
+## Verification and troubleshooting
+
+After a one-command remote install, verification is already run automatically.
+
+After a source install, you can run:
+
+```bash
+./verify-install.sh
+```
+
+Then restart Claude Code and try:
+
+```text
+/khon-party help
+/khon-party วิเคราะห์แผนนี้แบบ cross-functional
+/khon-party Should we enter this market now?
+```
+
+If the command does not appear:
+1. restart Claude Code again
+2. check that `~/.claude/commands/khon-party.md` exists
+3. if you used source install, rerun `./verify-install.sh`
+4. make sure the installed file still has valid YAML frontmatter
+
+To remove the command:
+
+```bash
+./uninstall.sh
+```
 
 ## Advanced usage
 
@@ -93,26 +186,18 @@ Examples:
 /khon-party [personas=architect,operator,skeptic,governor] วิเคราะห์ระบบนี้
 /khon-party [modules=cog.role_playing,cog.six_thinking_hats] [depth=deep] วิเคราะห์โจทย์นี้
 /khon-party [style=debate] เปรียบเทียบ 3 ทางเลือกนี้
+/khon-party [focus=innovation] ช่วยหาแนวทางใหม่ที่แตกต่างแต่ยังทำขายได้จริง
 ```
 
-See [`docs/EXAMPLES.md`](docs/EXAMPLES.md) for more.
-
-## Install target
-
-By default, `install.sh` installs the command to:
-
-```text
-~/.claude/commands/khon-party.md
-```
-
-## Repo structure
+## Project structure
 
 ```text
 khon-party/
-├── src/
-├── scripts/
+├── src/                         # editable source fragments
+├── scripts/                     # runtime build script
 ├── khon-v1/commands/khon-party.md
-├── install.sh
+├── install.sh                   # local/source install
+├── install-remote.sh            # one-command remote install
 ├── uninstall.sh
 ├── verify-install.sh
 ├── docs/
@@ -122,38 +207,44 @@ khon-party/
 └── specs/
 ```
 
-## Verification
+## For contributors
 
-After install:
+The installed runtime is a single self-contained file:
+
+```text
+khon-v1/commands/khon-party.md
+```
+
+But the editable source lives under `src/`, including:
+- `src/command/` for command fragments
+- `src/prompts/personas/` for persona cards
+- `src/prompts/modules/` for the embedded KHON cognitive module cards
+- `src/prompts/templates/` for brainstorm, debate, governance, and synthesis templates
+
+To regenerate the runtime locally:
 
 ```bash
-./verify-install.sh
+python3 scripts/build_runtime.py
 ```
-
-Then restart Claude Code and confirm the command is discoverable:
-
-```text
-/skills
-```
-
-Or type `/` and look for `/khon-party` in the command/skill picker.
-
-Then try:
-
-```text
-/khon-party help
-/khon-party วิเคราะห์แผนนี้แบบ cross-functional
-```
-
-If the command does not appear, check the installed file frontmatter first. Custom-command frontmatter must remain valid YAML, and `argument-hint` should be quoted when it contains bracket-heavy syntax.
 
 ## Design principles
 
 - zero-config first
-- command-first runtime
-- infer from prompt/context before asking
-- visible party discussion before synthesis
+- brainstorm first, debate second
+- visible discussion before synthesis
+- balance-first defaults
 - governance before risky advice
-- advanced options in help/docs, not in the main path
+- advanced options available without cluttering the main path
 
-This project is intentionally narrower in scope: one command, one simple install path, one strong default UX.
+## License
+
+This project is licensed under **CC BY-NC-SA 4.0**.
+
+That means people can fork and adapt it, but they must:
+- give credit
+- keep it non-commercial
+- share derivatives under the same license
+
+See [`LICENSE`](LICENSE) for the full text.
+
+The scope here is intentionally narrower: one command, one simple install path, and one strong default user experience.
