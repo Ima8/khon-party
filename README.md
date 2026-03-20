@@ -1,4 +1,4 @@
-# khon-party
+# khon-party — Think Wider. Debate Sharper.
 
 Turn one Claude Code prompt into a real brainstorm-then-debate session.
 
@@ -31,7 +31,7 @@ Example:
 ```
 
 ```text
-/khon-party ช่วยคิดแผนเปิดตัวฟีเจอร์นี้แบบ cross-functional
+/khon-party Help me plan the launch of this feature from a cross-functional angle.
 ```
 
 ## What it is good for
@@ -81,7 +81,7 @@ It is intentionally narrow in scope:
 Use it with a direct prompt:
 
 ```text
-/khon-party วิเคราะห์ระบบนี้ในมุม dev + biz + governance
+/khon-party Review this system from engineering, business, and governance angles
 ```
 
 Use it with the current conversation context:
@@ -93,13 +93,13 @@ Use it with the current conversation context:
 Force personas if you want tighter control:
 
 ```text
-/khon-party [personas=architect,operator,skeptic,governor] วิเคราะห์ระบบนี้
+/khon-party [personas=architect,operator,skeptic,governor] Review this system as a constrained technical panel
 ```
 
 Force modules if you want a specific style of pressure:
 
 ```text
-/khon-party [modules=cog.role_playing,cog.six_thinking_hats,cog.black_swan] เปรียบเทียบ 3 ทางเลือกนี้
+/khon-party [modules=cog.role_playing,cog.six_thinking_hats,cog.black_swan] Compare these three options and stress-test the downside
 ```
 
 See [`docs/EXAMPLES.md`](docs/EXAMPLES.md) for more.
@@ -160,7 +160,7 @@ Then restart Claude Code and try:
 
 ```text
 /khon-party help
-/khon-party วิเคราะห์แผนนี้แบบ cross-functional
+/khon-party Review this plan from a cross-functional perspective
 /khon-party Should we enter this market now?
 ```
 
@@ -183,10 +183,10 @@ Advanced controls are optional and intentionally hidden from the default flow.
 Examples:
 
 ```text
-/khon-party [personas=architect,operator,skeptic,governor] วิเคราะห์ระบบนี้
-/khon-party [modules=cog.role_playing,cog.six_thinking_hats] [depth=deep] วิเคราะห์โจทย์นี้
-/khon-party [style=debate] เปรียบเทียบ 3 ทางเลือกนี้
-/khon-party [focus=innovation] ช่วยหาแนวทางใหม่ที่แตกต่างแต่ยังทำขายได้จริง
+/khon-party [personas=architect,operator,skeptic,governor] Review this architecture with a constrained panel
+/khon-party [modules=cog.role_playing,cog.six_thinking_hats] [depth=deep] Analyze this problem deeply
+/khon-party [style=debate] Compare these three options
+/khon-party [focus=innovation] Find a differentiated direction that could still ship
 ```
 
 ## Project structure
@@ -247,4 +247,4 @@ That means people can fork and adapt it, but they must:
 
 See [`LICENSE`](LICENSE) for the full text.
 
-The scope here is intentionally narrower: one command, one simple install path, and one strong default user experience.
+The scope here is intentionally narrow: one command, one simple install path, and one strong default user experience.
