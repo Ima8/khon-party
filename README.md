@@ -5,7 +5,7 @@ A zero-config Claude Code command for running a structured multi-perspective par
 `khon-party` is a standalone, installable command for Claude Code that turns a single prompt into:
 - dynamic persona selection
 - dynamic cognitive-module selection
-- visible multi-round debate
+- a visible party-style discussion
 - governance-aware synthesis
 - safe next-step recommendations
 
@@ -51,9 +51,9 @@ Or let it use the conversation context:
 1. infer the real problem from your prompt/context
 2. derive 3-5 relevant personas automatically
 3. choose a dynamic subset of cognitive modules
-4. run a visible multi-round dialogue
+4. run a visible party-style discussion with sharp back-and-forth
 5. apply a governance gate to recommendations
-6. return a practical synthesis
+6. return a practical, friendlier synthesis
 
 ## Full-build authoring model
 
@@ -152,7 +152,7 @@ If the command does not appear, check the installed file frontmatter first. Cust
 - zero-config first
 - command-first runtime
 - infer from prompt/context before asking
-- visible debate before synthesis
+- visible party discussion before synthesis
 - governance before risky advice
 - advanced options in help/docs, not in the main path
 

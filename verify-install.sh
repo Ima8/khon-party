@@ -19,6 +19,8 @@ fail() {
 
 [ -f "${TARGET_FILE}" ] || fail "Installed command not found: ${TARGET_FILE}"
 
+REQUIRED_MODULE_COUNT=21
+
 REQUIRED_PATTERNS=(
   '<!-- GENERATED FROM SOURCE FILES. DO NOT EDIT khon-v1/commands/khon-party.md DIRECTLY. -->'
   'You are the KHON Party Orchestrator'
@@ -30,7 +32,10 @@ REQUIRED_PATTERNS=(
   '## Generated Module Catalog Summary'
   '## Embedded Cognitive Module Cards'
   '### cog.role_playing'
+  '### cog.starbursting'
   '### cog.black_swan'
+  '### cog.result_optimisation'
+  '### cog.conflict_resolution'
   '### cog.swiss_cheese'
   '## Embedded Debate Templates'
   '## Display Summary to User'
@@ -47,6 +52,13 @@ for pattern in "${REQUIRED_PATTERNS[@]}"; do
   fi
 done
 
+module_count="$(grep -Ec '^### cog\.' "${TARGET_FILE}")"
+if [ "${module_count}" -eq "${REQUIRED_MODULE_COUNT}" ]; then
+  ok "Found ${module_count} embedded module cards"
+else
+  fail "Expected ${REQUIRED_MODULE_COUNT} embedded module cards, found ${module_count}"
+fi
+
 cat <<'EOF'
 
 Verification passed.
@@ -54,7 +66,7 @@ Verification passed.
 Try in Claude Code:
 - /khon-party วิเคราะห์แผนนี้ในมุม dev + biz + governance
 - /khon-party
-- /khon-party [modules=cog.role_playing,cog.six_thinking_hats] [depth=deep] เปรียบเทียบ 3 ทางเลือกนี้
+- /khon-party [modules=cog.starbursting,cog.black_swan,cog.result_optimisation] [depth=deep] เปรียบเทียบ 3 ทางเลือกนี้
 
 If Claude Code was already open, restart it first.
 EOF

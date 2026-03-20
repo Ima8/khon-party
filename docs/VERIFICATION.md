@@ -18,7 +18,7 @@ Confirm the runtime file includes:
 - pre-flight inference rules
 - dynamic personas
 - dynamic module subset selection
-- visible debate
+- visible party discussion
 - governance gate
 - final synthesis
 
@@ -79,8 +79,8 @@ Check that it:
 Check that it:
 - infers objective
 - derives multiple personas
-- shows visible debate
-- returns synthesis
+- shows a visible party discussion with short reactive turns
+- returns a friendlier synthesis
 
 ### Case 3: no arguments
 
@@ -100,8 +100,8 @@ Check that it:
 ```
 
 Check that it:
-- adds a meaningful convergence round when disagreement remains
-- makes trade-offs explicit
+- keeps the conversation deep with roughly 16-22+ turns when the topic warrants it
+- makes trade-offs explicit without falling back into visible round headings
 
 ### Case 5: forced modules
 

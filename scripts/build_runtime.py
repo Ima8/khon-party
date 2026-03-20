@@ -35,6 +35,20 @@ REQUIRED_MODULE_FILES = [
     'cog.consequences.md',
     'cog.swot.md',
     'cog.swiss_cheese.md',
+    'cog.starbursting.md',
+    'cog.five_whys.md',
+    'cog.scamper.md',
+    'cog.mind_mapping.md',
+    'cog.reverse_brainstorming.md',
+    'cog.face_it.md',
+    'cog.pareto.md',
+    'cog.eisenhower.md',
+    'cog.friend_request_trust.md',
+    'cog.making_of.md',
+    'cog.double_loop_learning.md',
+    'cog.result_optimisation.md',
+    'cog.monte_carlo.md',
+    'cog.conflict_resolution.md',
 ]
 
 MODULE_FIELD_RE = re.compile(r'^-\s+([a-z_]+):\s+`?(.*?)`?\s*$')

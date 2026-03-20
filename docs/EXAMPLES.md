@@ -2,6 +2,8 @@
 
 These examples show the intended UX for `/khon-party`.
 
+The default feel should be a visible party discussion: short, sharp turns between named personas, followed by a warmer closing synthesis.
+
 ## Default usage
 
 Use the prompt directly:

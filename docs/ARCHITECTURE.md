@@ -61,6 +61,6 @@ The command follows this high-level sequence:
 2. parse optional overrides
 3. derive 3-5 personas
 4. choose a dynamic subset of cognitive modules
-5. run visible multi-round debate
+5. run a visible party-style discussion
 6. apply a governance gate
-7. return final synthesis and safe next steps
+7. return a friendlier final synthesis and safe next steps
