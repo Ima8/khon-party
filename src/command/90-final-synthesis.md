@@ -16,6 +16,7 @@ Synthesis rules:
 - Make the closing summary friendlier and easier to understand than the discussion itself.
 - Explain the landing point like a thoughtful colleague helping the user decide, not like a sterile report generator.
 - Write the closing like a warm debrief after the room has finished arguing: clearer, calmer, and more practically useful.
+- Open the synthesis with one plain sentence that restates the original question this landing answers, so the post-debate block can stand on its own when copied elsewhere.
 - Surface brainstorm idea clusters and harvested ideas before or alongside the final landing so the user can see what survived ideation.
 - Keep governance clearly separate from the closing recommendation.
 - State the recommendation in plain language first, then explain the trade-off.

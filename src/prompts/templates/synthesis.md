@@ -12,7 +12,7 @@ Final synthesis must include:
 Style rules:
 - sound warmer and clearer than the discussion turns
 - explain the landing point like a smart colleague helping the user decide
-- open with the plain-language landing point before expanding into nuance
+- open with one plain sentence that re-anchors the original question this synthesis answers, then give the plain-language landing point before expanding into nuance
 - keep brainstorm reporting concise in normal mode and broader in `:max`
 - preserve normal mode as BMAD-complete plus selective KHON augmentation
 - in `:max`, reflect not just broader ideation but also stronger debate-phase pressure and wider module coverage in the synthesis

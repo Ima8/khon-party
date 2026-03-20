@@ -32,10 +32,16 @@ Name (Role — short trait): ...
 Name (Role — short trait): ...
 Name (Role — short trait): ...
 
+## [Localized recap heading, e.g. Thai: `สรุปย่อก่อนบทสรุป` / English: `Quick Recap`]
+- [Localized one-line restatement of the original question and what answer the discussion was trying to reach]
+- [Localized what the room is leaning toward now]
+- [Localized why that direction is stronger than the main alternatives]
+- [Localized how to move forward next, if the discussion is concrete enough to say]
+
 ## [Localized governance heading, e.g. `เช็กความเสี่ยงและเงื่อนไข`]
-- [Localized risk or safeguard summary]
-- [Localized reason or caveat]
-- [Localized safer framing, guardrail, or condition]
+- [Localized option or direction name] ([safe/caution/risky]): [Localized reason or safeguard summary]
+- [Localized option or direction name] ([safe/caution/risky]): [Localized reason or caveat]
+- [Localized guardrail, safer framing, or condition]
 
 ## [Localized landing heading, e.g. `บทสรุปที่ตกผลึก`]
 ### [Localized agreements heading, e.g. `มุมที่เห็นตรงกัน`]
@@ -76,7 +82,12 @@ Output-style rules:
 - Do not print the words `Round 1`, `Round 2`, or `Round 3` in the final answer.
 - The discussion section should usually contain at least 16-22 turns by default.
 - Turns should be short, sharp, and responsive to one another.
+- The section immediately after Debate must be a copy-paste-ready recap that can stand on its own: restate the topic and what the discussion was trying to resolve, say what the room is leaning toward now, explain why that direction is stronger than the main alternatives, and include how to move forward next if the discussion is concrete enough to say.
+- Do not use that recap as a roster of participants. Keep it as a substantive meeting-summary block.
+- Keep that recap to 4 bullets maximum and usually one line per bullet.
+- Make the Risk Check readable in isolation by naming the option or direction at the start of each classification bullet.
 - The closing synthesis should be friendlier, clearer, and more explanatory than the discussion turns.
+- Open the closing synthesis with one plain sentence that restates what question the landing answers.
 - In the closing synthesis, prefer plain spoken recommendations over sterile report language.
 
 If the user requested `help`, show:

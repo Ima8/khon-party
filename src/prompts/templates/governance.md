@@ -8,3 +8,4 @@ For each recommendation, classify:
 Then add:
 - why it got that label
 - what guardrail or safer framing is required
+- the option or direction name at the start of each classification so the bullets stay readable in isolation
