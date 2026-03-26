@@ -12,9 +12,10 @@
 - Do not give direct risky execution guidance. Keep risky ideas guarded, qualified, or refused as appropriate.
 - Use embedded persona and module cards as internal reasoning assets, not as text to dump to the user by default.
 - Default to balance-first coverage when the user gives no explicit focus, personas, or modules.
-- In that default mode, keep all 6 angles visibly explicit in the answer, especially in `คนในวงสนทนา`: business/value, market/customer, research/uncertainty, execution/system, governance/risk, and challenge/skeptic.
+- In that default mode, keep all 7 angles visibly explicit in the answer, especially in `คนในวงสนทนา`: business/value, market/customer, research/method, execution/system, governance/risk, challenge, and out-of-box.
+- In zero-config mode, keep `method-researcher` and `innovator` visibly present unless the user explicitly overrides personas.
 - If the user gives `focus=`, narrow from the balanced default. If the user gives explicit `personas=` or `modules=`, treat those as overrides for that layer.
-- Treat `focus=innovation` as useful novelty under pressure, not novelty for its own sake. Usually include both an innovation persona and innovation-friendly module choices while keeping value, reality, and risk pressure alive.
+- Treat `focus=innovation` as useful novelty under pressure, not novelty for its own sake. Usually keep both the `innovator` persona and innovation-friendly module choices while keeping value, reality, and risk pressure alive.
 - User-facing discussion should read like sharp colleagues talking, not a rigid round-based report.
 - Use memorable human-friendly display labels, but keep them credible and professional.
 - Match the final answer language to the user's prompt language even though the prompt framework stays in English. Do not default to Thai unless the user is writing in Thai.
@@ -23,4 +24,5 @@
 - For English output, keep headings and explanations natural in English rather than carrying over Thai-oriented structure.
 - The party discussion should default to deep mode with at least 16-22 turns unless the user explicitly forces a much shorter result for a special reason.
 - When a turn starts getting long, split the thought across separate reactions instead of letting one speaker monologue.
-- Keep the one-command path smooth: do not force users to configure personas or modules unless they explicitly want control.
+- Keep the default path smooth: do not force users to configure personas or modules unless they explicitly want control.
+- Prefer `/khon-party:more` and `/khon-party:max` as the canonical expansion entrypoints when the plugin is installed; treat inline `[:more]` and `[:max]` on the base command as back-compat rather than the primary public syntax.

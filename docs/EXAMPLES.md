@@ -1,10 +1,10 @@
 # EXAMPLES
 
-These examples show the intended UX for `/khon-party`.
+These examples show the intended UX for the `khon-party` command family.
 
 The default feel should be a visible party discussion: short, sharp turns between named personas, followed by a warmer closing synthesis.
 
-## Default usage
+## Balanced default
 
 Use the prompt directly:
 
@@ -18,19 +18,19 @@ Use current conversation context:
 /khon-party
 ```
 
-## Cross-functional planning
+## Broader namespaced mode
 
 ```text
-/khon-party วางแผน rollout feature นี้ให้ครอบคลุม product, engineering, ops, และ risk
+/khon-party:more วางแผน rollout feature นี้ให้ครอบคลุม product, engineering, ops, และ risk
 ```
 
-## Compare options
+## Strongest namespaced mode
 
 ```text
-/khon-party เปรียบเทียบ 3 ทางเลือกนี้และช่วยเลือกทางที่ practical ที่สุด
+/khon-party:max เปรียบเทียบ 3 ทางเลือกนี้แล้วกด debate ให้สุดก่อนช่วยเลือกทางที่ practical ที่สุด
 ```
 
-## Deep debate
+## Deep debate with the base command
 
 ```text
 /khon-party [depth=deep] [style=debate] วิเคราะห์ trade-off ของ architecture นี้
@@ -45,16 +45,17 @@ Use current conversation context:
 ## Force modules
 
 ```text
-/khon-party [modules=cog.role_playing,cog.six_thinking_hats,cog.black_swan] วิเคราะห์โจทย์นี้
+/khon-party:more [modules=cog.role_playing,cog.six_thinking_hats,cog.black_swan] วิเคราะห์โจทย์นี้
 ```
 
 ## Help
 
 ```text
-/khon-party [help]
+/khon-party help
 ```
 
 ## Notes
 
 - The normal path should work without advanced controls.
-- Advanced controls are optional hints or overrides, not required setup.
+- `/khon-party:more` and `/khon-party:max` are the preferred expansion syntax once the plugin is loaded.
+- Inline `[:more]` and `[:max]` on the base command remain available for back-compat.

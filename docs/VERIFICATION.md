@@ -1,18 +1,22 @@
 # VERIFICATION
 
-Use this checklist to verify `khon-party` without changing the runtime design.
+Use this checklist to verify the `khon-party` command family.
 
 ## 1. Static checks
 
 Confirm the repo contains:
 
 - `khon-v1/commands/khon-party.md`
+- `.claude-plugin/marketplace.json`
+- `plugins/khon-party/.claude-plugin/plugin.json`
+- `plugins/khon-party/skills/more/SKILL.md`
+- `plugins/khon-party/skills/max/SKILL.md`
 - `install.sh`
 - `uninstall.sh`
 - `verify-install.sh`
 - support docs/specs/examples
 
-Confirm the runtime file includes:
+Confirm the generated runtime files include:
 
 - command overview
 - pre-flight inference rules
@@ -21,6 +25,7 @@ Confirm the runtime file includes:
 - visible party discussion
 - governance gate
 - final synthesis
+- namespaced mode markers for `:more` and `:max`
 
 ## 2. Install verification
 
@@ -34,10 +39,15 @@ curl -fsSL https://raw.githubusercontent.com/Ima8/khon-party/main/install-remote
 
 Expected result:
 
-- the runtime file is downloaded from GitHub
-- the downloaded file is validated before install
+- the base runtime file is downloaded from GitHub
+- the verifier is downloaded from GitHub
+- the generated marketplace/plugin bundle is downloaded from GitHub
+- the downloaded base runtime is validated before install
 - `~/.claude/commands/khon-party.md` exists
-- the installed file is validated again
+- the installed base command is validated again
+- the `khon-party` marketplace is configured
+- the user-scope plugin `khon-party@khon-party` is installed and enabled
+- the script prints `/khon-party`, `/khon-party:more`, and `/khon-party:max` as ready-to-use commands
 
 ### Source install
 
@@ -52,13 +62,17 @@ Expected result:
 
 - `~/.claude/commands/khon-party.md` exists
 - required sections are present
+- the `khon-party` marketplace is configured
+- the user-scope plugin `khon-party@khon-party` is installed and enabled
+- plugin source files are generated in-repo
+- namespaced mode markers are present in `plugins/khon-party/skills/more/SKILL.md` and `plugins/khon-party/skills/max/SKILL.md`
 - examples are printed after verification
 
 ## 3. Registration checks in Claude Code
 
-Before behavioral testing, confirm the command is actually discoverable.
+Before behavioral testing, confirm the commands are actually discoverable.
 
-### Check 0: command discovery
+### Check 0: base command discovery
 
 After restarting Claude Code:
 
@@ -68,9 +82,20 @@ After restarting Claude Code:
 
 Or type `/` and confirm `/khon-party` appears in the picker.
 
+### Check 1: namespaced plugin discovery
+
+After restart or after `/reload-plugins`, confirm these appear in the picker:
+
+```text
+/khon-party:more
+/khon-party:max
+```
+
 Notes:
 - custom commands are best verified through `/skills` or slash autocomplete
 - if `/khon-party` is missing, inspect the installed file frontmatter first
+- if `/khon-party:more` or `/khon-party:max` are missing, check `claude plugin list --json`, `claude plugin marketplace list --json`, then inspect the generated plugin files
+- for unpublished local changes, `claude --plugin-dir /path/to/khon-party/plugins/khon-party` is still useful as a development-only shortcut
 - `argument-hint` values that contain `[]` should be quoted so the frontmatter remains valid YAML
 
 ## 4. Behavioral checks in Claude Code
@@ -110,27 +135,39 @@ Check that it:
 - does not start with a setup wizard
 - asks a clarifying question only if blocked
 
-### Case 4: deep debate
+### Case 4: broader namespaced mode
 
 ```text
-/khon-party [depth=deep] เปรียบเทียบ 3 ทางเลือกนี้
+/khon-party:more เปรียบเทียบ 3 ทางเลือกนี้
 ```
 
 Check that it:
-- keeps the conversation deep with roughly 16-22+ turns when the topic warrants it
-- makes trade-offs explicit without falling back into visible round headings
+- visibly broadens idea harvest versus the default mode
+- increases debate pressure without collapsing into max-mode saturation
 
-### Case 5: forced modules
+### Case 5: strongest namespaced mode
 
 ```text
-/khon-party [modules=cog.role_playing,cog.six_thinking_hats,cog.black_swan] วิเคราะห์โจทย์นี้
+/khon-party:max เปรียบเทียบ 3 ทางเลือกนี้
 ```
 
 Check that it:
-- respects the explicit module override
+- reflects the strongest mode profile
+- shows evidence of all-21-module saturation across the reasoning flow
+- can expand the visible room when useful
+- can run much longer than the base mode when the topic supports it
+
+### Case 6: forced modules
+
+```text
+/khon-party:more [modules=cog.role_playing,cog.six_thinking_hats,cog.black_swan] วิเคราะห์โจทย์นี้
+```
+
+Check that it:
+- respects the explicit module override for the visible debate set
 - still applies governance before the final recommendation
 
-### Case 6: risky scenario
+### Case 7: risky scenario
 
 Use a prompt with meaningful downside or governance concerns.
 
@@ -140,8 +177,10 @@ Check that it:
 
 ## Pass criteria
 
-- one-command UX remains simple
+- the base command UX remains simple
+- namespaced commands are discoverable when the plugin is loaded
 - command infers before asking
 - output includes debate and synthesis
 - governance is visible and separate from synthesis
 - advanced controls remain optional
+- docs match the actual command-family packaging model

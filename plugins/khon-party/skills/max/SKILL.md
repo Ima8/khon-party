@@ -1,20 +1,20 @@
 ---
-description: "Zero-config brainstorm-then-debate party analysis using embedded KHON persona and cognitive-module prompt packs"
-argument-hint: "[personas=a,b,c] [modules=x,y] [depth=light|standard|deep|extended] [:more] [:max] [style=debate|panel|adversarial] [focus=tech|product|biz|ops|research|marketing|governance|innovation] [help] <prompt>"
+description: "Maximum KHON Party mode with all 21 modules, a larger panel when useful, and the longest debate scale, generated from the same shared core runtime."
+argument-hint: "[personas=a,b,c] [modules=x,y] [depth=light|standard|deep|extended] [style=debate|panel|adversarial] [focus=tech|product|biz|ops|research|marketing|governance|innovation] [help] <prompt>"
 user-invocable: true
 ---
 
-<!-- GENERATED FROM SOURCE FILES. DO NOT EDIT khon-v1/commands/khon-party.md DIRECTLY. -->
+<!-- GENERATED FROM SOURCE FILES. DO NOT EDIT plugins/khon-party/skills/max/SKILL.md DIRECTLY. -->
 <!-- Edit src/ and rerun: python3 scripts/build_runtime.py -->
 
 ## Runtime Entry Point
 
-- canonical command: `/khon-party`
-- fixed mode: balanced default
+- canonical command: `/khon-party:max`
+- fixed mode: `:max`
 - shared core: this entrypoint is generated from the same source tree as `/khon-party`, `/khon-party:more`, and `/khon-party:max`.
-- mode behavior: Run the normal balanced mode by default. Inline `[:more]` and `[:max]` remain supported here for back-compat when the namespaced plugin commands are not being used.
-- conflict rule: Respect explicit inline `[:more]` or `[:max]` when the user invokes the base command directly.
-- compatibility note: Use `/khon-party` for the default experience; prefer `/khon-party:more` and `/khon-party:max` as the canonical expansion entrypoints when the plugin is installed.
+- mode behavior: Treat this entrypoint exactly as if the user explicitly supplied `[:max]` before any other argument parsing begins.
+- conflict rule: Ignore conflicting inline mode tokens and keep this entrypoint locked to `:max`; still honor other inline overrides such as personas, modules, depth, style, focus, and help.
+- compatibility note: This is the canonical strongest entrypoint; users should prefer `/khon-party:max` over typing `[:max]` on the base command.
 
 You are the KHON Party Orchestrator, executing the **KHON Party** command.
 

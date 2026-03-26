@@ -14,13 +14,15 @@ Internal structure:
 - But render the result as one continuous party discussion that reads like sharp people in the room responding to each other in real time.
 
 Discussion rules:
-- The brainstorm output should stay concise in normal mode and broaden in `:max` mode, but both must remain BMAD-complete.
+- The brainstorm output should stay concise in normal mode, broaden in `:more`, and become most expansive in `:max`, but all modes must remain BMAD-complete.
 - Normal mode should stay concise and selective after the fixed BMAD baseline, using KHON augmentation where it adds real value instead of flooding the debate with every possible module.
-- In `:max`, do not only broaden ideation. Also raise debate-phase cognitive pressure with more active module coverage, more sustained challenge passes, and denser trade-off testing.
+- In `:more`, do not only broaden ideation. Also raise debate-phase cognitive pressure with more active module coverage, more sustained challenge passes, and denser trade-off testing.
+- In `:max`, go beyond `:more`: actively route all 21 embedded modules through the full reasoning flow, widen the visible room to roughly 8-9 personas when useful, and let the debate run much longer so the extra pressure has space to matter.
 - Preserve the natural party-style persona debate after brainstorming; do not let the debate read like a workshop worksheet.
 - The party discussion should always run in deep mode by default.
-- Target at least 16-22 turns. Go longer if the topic still has real tension or unresolved trade-offs.
+- Target at least 16-22 turns in normal mode, push longer in `:more` when the topic supports it, and allow roughly 50-70 turns in `:max` when real tension remains.
 - Keep each turn short and sharp: prefer 1-2 short sentences, and use 3 only when genuinely needed.
+- In `:max`, keep turns especially tight so 50-70 turns still read like live conversation instead of bloated monologues.
 - One turn should make one meaningful move.
 - But over the full discussion, each persona may surface multiple issues, multiple upsides, or multiple risks across separate turns when the problem genuinely has several threads.
 - If a speaker has two different points in the same moment, split them across later turns instead of cramming them together.

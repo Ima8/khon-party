@@ -11,10 +11,11 @@ Use this output contract:
 ## [Localized roster heading, e.g. Thai: `คนในวงสนทนา` / English: `Voices in the Room`]
 - Name (Role — short trait) — [Localized Business/Value angle label]: [Localized why-this-person-is-here text]
 - Name (Role — short trait) — [Localized Market/Customer angle label]: [Localized why-this-person-is-here text]
-- Name (Role — short trait) — [Localized Research/Uncertainty angle label]: [Localized why-this-person-is-here text]
+- Name (Role — short trait) — [Localized Research/Method angle label]: [Localized why-this-person-is-here text]
 - Name (Role — short trait) — [Localized Execution/System angle label]: [Localized why-this-person-is-here text]
 - Name (Role — short trait) — [Localized Governance/Risk angle label]: [Localized why-this-person-is-here text]
-- Name (Role — short trait) — [Localized Challenge/Skeptic angle label]: [Localized why-this-person-is-here text]
+- Name (Role — short trait) — [Localized Challenge angle label]: [Localized why-this-person-is-here text]
+- Name (Role — short trait) — [Localized Out-of-box angle label]: [Localized why-this-person-is-here text]
 
 ## [Localized idea clusters heading, e.g. Thai: `ประเด็นที่แตกออกมา` / English: `Emerging Threads`]
 - [Localized cluster summary]
@@ -70,17 +71,18 @@ Output-style rules:
 - Match the final answer language to the user's prompt language. Do not default to Thai unless the user is writing in Thai.
 - For Thai output, prefer headings like `สรุปโจทย์`, `คนในวงสนทนา`, `ประเด็นที่แตกออกมา`, `ไอเดียที่ควรหยิบมาคิดต่อ`, `ข้อถกเถียง`, `เช็กความเสี่ยงและเงื่อนไข`, `บทสรุปที่ตกผลึก`, `มุมที่เห็นตรงกัน`, `มุมที่ยังเห็นต่าง`, `ข้อเสนอแนะ`, and `ขั้นถัดไป` instead of stiff direct translations such as `Objective`, `Roster`, or `Governance`.
 - For English output, prefer natural headings such as `Problem Summary`, `Voices in the Room`, `Emerging Threads`, `Ideas Worth Carrying Forward`, `Debate`, `Risk Check`, `What We Landed On`, `Shared Ground`, `Open Disagreements`, `Recommendation`, and `Next Steps`.
-- In zero-config mode, make the 6 required balance-first angles visibly explicit in the roster section unless the user explicitly overrides personas.
+- In zero-config mode, make the 7 required balance-first angles visibly explicit in the roster section unless the user explicitly overrides personas.
 - Localize every user-facing section heading and micro-label into the user's language. Avoid mixed-language headings unless the user explicitly wants that.
 - Reduce unexplained jargon in the active output language. If an English term is necessary in Thai output, explain it in Thai on first use before using the English shorthand again.
 - If module IDs remain in English, keep the explanation column plain and human so the user understands why each module matters without knowing the internal label system.
 - Brainstorm must happen before debate every time, but only show the concise outcomes of brainstorming rather than a long worksheet dump.
 - In normal mode, show BMAD-complete brainstorming outcomes concisely and keep KHON augmentation selective.
-- In `:max` mode, show a broader idea-space harvest and more cluster breadth before the debate.
-- In `:max` mode, let the visible discussion also reflect higher debate-phase module coverage and stronger cognitive pressure, not just a larger brainstorm harvest.
+- In `:more` mode, show a broader idea-space harvest and more cluster breadth before the debate.
+- In `:more` mode, let the visible discussion also reflect higher debate-phase module coverage and stronger cognitive pressure, not just a larger brainstorm harvest.
+- In `:max` mode, make the strongest setting visibly feel bigger: broader harvest, fuller module saturation across the reasoning flow, a room that can expand to roughly 8-9 personas when useful, and a much longer debate when the topic still has real tension.
 - The discussion should feel like a real party conversation, not a transcript of formal rounds.
 - Do not print the words `Round 1`, `Round 2`, or `Round 3` in the final answer.
-- The discussion section should usually contain at least 16-22 turns by default.
+- The discussion section should usually contain at least 16-22 turns by default, push longer in `:more`, and may run roughly 50-70 turns in `:max` when the topic genuinely supports it.
 - Turns should be short, sharp, and responsive to one another.
 - The section immediately after Debate must be a copy-paste-ready recap that can stand on its own: restate the topic and what the discussion was trying to resolve, say what the room is leaning toward now, explain why that direction is stronger than the main alternatives, and include how to move forward next if the discussion is concrete enough to say.
 - Do not use that recap as a roster of participants. Keep it as a substantive meeting-summary block.

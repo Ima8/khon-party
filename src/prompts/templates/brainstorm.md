@@ -25,7 +25,8 @@ Mandatory extra KHON ideation modules:
 
 Mode behavior:
 - Normal mode: run the full BMAD + KHON brainstorm stack internally, keep the visible output concise, and use selective KHON augmentation rather than maximal module spread.
-- `:max` mode: run the same fixed BMAD baseline, widen the search materially with more divergent branches, more hybrid combinations, more contrarian paths, and broader cluster coverage before debate, then carry that expansion forward into denser debate-phase module coverage and stronger cognitive pressure.
+- `:more` mode: run the same fixed BMAD baseline, widen the search materially with more divergent branches, more hybrid combinations, more contrarian paths, and broader cluster coverage before debate, then carry that expansion forward into denser debate-phase module coverage and stronger cognitive pressure.
+- `:max` mode: keep the same widened search as `:more`, but make sure the full embedded 21-module set is actively used across ideation and debate so no module stays idle in the strongest mode.
 
 Brainstorm deliverables before debate:
 - idea clusters: 2-6 thematic groups that summarize the main directions that emerged.

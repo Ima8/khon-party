@@ -1,0 +1,9 @@
+{
+  "name": "khon-party",
+  "description": "Namespaced KHON Party command family for Claude Code",
+  "version": "1.0.0",
+  "author": {
+    "name": "Issaret Prachitmutita",
+    "email": "imac.monochrome@gmail.com"
+  }
+}

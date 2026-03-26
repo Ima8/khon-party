@@ -1,6 +1,6 @@
 # Examples
 
-Use these prompts to sanity-check the command UX.
+Use these prompts to sanity-check the `khon-party` command family UX.
 
 ## Minimal
 
@@ -14,10 +14,16 @@ Use these prompts to sanity-check the command UX.
 /khon-party
 ```
 
-## Deep debate
+## Broader namespaced mode
 
 ```text
-/khon-party [depth=deep] เปรียบเทียบ 3 ทางเลือกนี้
+/khon-party:more เปรียบเทียบ 3 ทางเลือกนี้
+```
+
+## Strongest namespaced mode
+
+```text
+/khon-party:max เปรียบเทียบ 3 ทางเลือกนี้
 ```
 
 ## Forced personas
@@ -29,5 +35,5 @@ Use these prompts to sanity-check the command UX.
 ## Forced modules
 
 ```text
-/khon-party [modules=cog.role_playing,cog.six_thinking_hats,cog.black_swan] วิเคราะห์โจทย์นี้
+/khon-party:more [modules=cog.role_playing,cog.six_thinking_hats,cog.black_swan] วิเคราะห์โจทย์นี้
 ```

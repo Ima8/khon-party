@@ -26,13 +26,14 @@ Mandatory brainstorm core:
 - Use the fallback pair `cog.second_order_observation` and `cog.consequences` only when no clearly better pair emerges.
 - Use the extra KHON modules inside ideation itself, not only later in debate or synthesis.
 - If the user forces a small module override set, preserve the BMAD ideation set anyway and use the override mainly to shape the debate phase.
-- Manual module override remains optional advanced control, not part of the default one-command UX.
+- Manual module override remains optional advanced control, not part of the default base-command UX.
 
 Module selection rules:
 - For the visible debate, prefer 3-5 modules beyond the mandatory brainstorm core in normal mode.
 - In zero-config mode with no explicit `focus=`, `personas=`, or `modules=`, choose a balanced debate subset that covers value framing, market or customer reality, uncertainty reduction, execution consequences, governance or risk pressure, and skeptical challenge. Achieve that balance with a mixed module set rather than a narrow best-fit pack.
-- If explicit `modules=` is present, treat that override as the visible debate set and do not silently pad it with unrelated modules beyond what is needed for the mandatory brainstorm baseline.
-- In `:max`, expand debate-phase module coverage beyond the normal baseline when useful so more distinct reasoning lenses actively pressure the conversation.
+- If explicit `modules=` is present, treat that override as the visible debate set and do not silently pad it with unrelated modules beyond what is needed for the mandatory brainstorm baseline, unless the user explicitly asked for `:max`.
+- In `:more`, expand debate-phase module coverage beyond the normal baseline when useful so more distinct reasoning lenses actively pressure the conversation.
+- In `:max`, use the full embedded 21-module set across ideation and debate, distributing them across phases instead of collapsing back to a small debate subset.
 - Cover at least 3 different categories when possible.
 - For technical / architecture topics, bias toward `cog.consequences`, `cog.black_swan`, `cog.reverse_brainstorming`, `cog.monte_carlo`, and `cog.second_order_observation`.
 - For product / business / marketing topics, bias toward `cog.swot`, `cog.scamper`, `cog.pareto`, `cog.making_of`, and `cog.face_it`.
@@ -46,8 +47,10 @@ Module selection rules:
 - Record which 2+ KHON modules were injected into brainstorm ideation and why they were the best non-overlapping fit.
 - Normal behavior should keep brainstorm reporting concise after the full internal ideation pass.
 - Normal behavior should remain BMAD-complete with selective KHON augmentation rather than maximal module spread.
-- `:max` should expand ideation breadth materially: more divergent angles, more candidate ideas, and broader cluster coverage before the debate starts.
-- `:max` should also increase debate-phase cognitive pressure: more active module interplay, more cross-examination of claims, and wider coverage of unresolved trade-offs.
+- `:more` should expand ideation breadth materially: more divergent angles, more candidate ideas, and broader cluster coverage before the debate starts.
+- `:more` should also increase debate-phase cognitive pressure: more active module interplay, more cross-examination of claims, and wider coverage of unresolved trade-offs.
+- `:max` should inherit the same widened ideation as `:more`, then actively use all 21 embedded cognitive modules across the full reasoning flow.
+- In `:max`, make module usage phase-aware and non-redundant: spread the full set across brainstorm, early framing, mid-debate challenge, late trade-off testing, governance, and synthesis rather than dumping them all into one phase.
 - Use the generated module catalog summary below as the fast index before reading full module cards.
 
 Use the embedded cognitive module cards below as the methodology source.

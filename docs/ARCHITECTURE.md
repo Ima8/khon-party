@@ -1,20 +1,22 @@
 # ARCHITECTURE
 
-This is the single-file developer brief for `khon-party`.
+This is the maintainer brief for `khon-party`.
 
-If you are coming back later to maintain, extend, or debug this repo, read this file first. It is meant to explain the product model, prompt architecture, runtime boundary, and the rules that should not be broken.
+If you are coming back later to maintain, extend, or debug this repo, read this file first. It explains the product model, prompt architecture, runtime boundary, packaging model, and the rules that should not be broken.
 
 ## 1. What khon-party is
 
-`khon-party` is a **Claude Code custom command** designed to turn one prompt into a **brainstorm-then-debate** flow.
+`khon-party` is a **Claude Code command family** designed to turn one prompt into a **brainstorm-then-debate** flow.
 
 Its job is not to produce hidden internal reasoning. Its job is to give the user a better visible working session inside Claude Code:
 - broaden the idea space first
 - pressure-test the strongest options second
 - land on a practical recommendation last
 
-The command is intentionally narrow in scope:
-- one command: `/khon-party`
+The command family is intentionally narrow in scope:
+- `/khon-party` — balanced default
+- `/khon-party:more` — broader ideation and stronger debate pressure
+- `/khon-party:max` — strongest mode with the fullest runtime profile
 - zero-config default UX
 - visible multi-perspective discussion
 - governance-aware synthesis
@@ -22,28 +24,34 @@ The command is intentionally narrow in scope:
 It is **not**:
 - an npm package
 - an IDE extension marketplace package
-- a multi-command framework that requires setup before first use
+- a setup-heavy command suite that requires first-run configuration
 - a hidden chain-of-thought dump
 
 ## 2. Product principles
 
 These are the core rules of the project.
 
-1. **One-command UX**
+1. **Simple default path**
    - The normal user path should stay simple:
      1. install once
      2. restart Claude Code
      3. use `/khon-party`
 
-2. **Zero-config by default**
+2. **Namespaced expansion commands**
+   - When the plugin is loaded, the preferred expansion syntax is:
+     - `/khon-party:more`
+     - `/khon-party:max`
+   - Inline `[:more]` and `[:max]` on the base command remain only for back-compat.
+
+3. **Zero-config by default**
    - Do not force setup questions, config files, or wizard flows in the normal path.
    - Infer from arguments and conversation context first.
 
-3. **Brainstorm first, debate second**
+4. **Brainstorm first, debate second**
    - The command should widen the space before converging.
    - It should not jump straight into a narrow answer.
 
-4. **Balance-first defaults**
+5. **Balance-first defaults**
    - In zero-config mode, the visible output should cover the six required angles:
      - business/value
      - market/customer
@@ -52,54 +60,60 @@ These are the core rules of the project.
      - governance/risk
      - challenge/skeptic
 
-5. **Language follows the user**
+6. **Language follows the user**
    - The prompt framework may stay in English internally.
    - The final output should follow the user's prompt language.
 
-6. **Governance before recommendation**
+7. **Governance before recommendation**
    - Risk must be surfaced before the closing recommendation.
    - Risky advice should be reframed with guardrails, not delivered blindly.
 
-7. **Do not expose internal reasoning artifacts unless they are user-useful**
+8. **Do not expose internal reasoning artifacts unless they are user-useful**
    - Example: the visible `Thinking Lenses Used` section was intentionally removed.
    - Keep the output human, useful, and selective.
 
 ## 3. Runtime architecture
 
-The runtime boundary is intentionally simple.
+The runtime boundary is intentionally simple, but it now has multiple generated entrypoints that share one core.
 
-### Installed artifact
+### Generated runtime family
 
-The actual installed command is one generated file:
+The build produces:
 
 ```text
 khon-v1/commands/khon-party.md
+plugins/khon-party/skills/more/SKILL.md
+plugins/khon-party/skills/max/SKILL.md
 ```
 
-That file is installed to:
+### Runtime destinations
+
+- Base command install target:
 
 ```text
 ~/.claude/commands/khon-party.md
 ```
 
-The end user should never need the rest of the repo at runtime if they are using the prebuilt install path.
+- Namespaced plugin entrypoints are installed through Claude Code's marketplace/plugin flow in user scope.
+- For unpublished local changes, maintainers can still load the plugin directly with `--plugin-dir` during development.
 
 ### Source-of-truth authoring model
 
-The runtime is generated from smaller source files under `src/`.
+The runtime family is generated from smaller source files under `src/`.
 
 Key areas:
 - `src/command/` — command rules and orchestration instructions
 - `src/prompts/personas/` — persona cards
 - `src/prompts/modules/` — embedded KHON module cards
 - `src/prompts/templates/` — brainstorm / debate / governance / synthesis templates
-- `scripts/build_runtime.py` — generator that assembles the final runtime file
+- `scripts/build_runtime.py` — generator that assembles the runtime family
 
 ### Why this split exists
 
 This structure keeps both goals true:
-- **users** get a single installable command file
+- **users** get a simple base install and clear namespaced expansion entrypoints
 - **maintainers** can edit a modular prompt system instead of one giant markdown blob
+- **the runtime** stays drift-resistant because every entrypoint is generated from the same shared source tree
 
 ## 4. Prompt architecture
 
@@ -116,31 +130,38 @@ At a high level, `khon-party` runs like this:
      - `depth=`
      - `style=`
      - `focus=`
-     - `:max`
+     - back-compat inline `:more`
+     - back-compat inline `:max`
 
-3. **Persona selection**
+3. **Mode selection**
+   - `/khon-party` runs the balanced default profile.
+   - `/khon-party:more` behaves as fixed `:more` before any other parsing.
+   - `/khon-party:max` behaves as fixed `:max` before any other parsing.
+
+4. **Persona selection**
    - In zero-config mode, start from the balance-first six-angle coverage.
    - If explicit personas are provided, use them as the visible override.
 
-4. **Module selection**
+5. **Module selection**
    - Use the embedded module set dynamically.
    - Preserve brainstorm breadth first, then debate pressure.
    - If explicit modules are provided, treat them as the visible override.
+   - In max mode, use the full embedded 21-module set across the reasoning flow.
 
-5. **Brainstorm phase**
+6. **Brainstorm phase**
    - This happens before debate.
    - The output should show the concise outcomes of brainstorming, not a raw worksheet dump.
 
-6. **Debate phase**
+7. **Debate phase**
    - Visible discussion between selected voices.
    - Turns should be short, sharp, and responsive.
    - The discussion should feel like colleagues actually testing ideas, not formal numbered rounds.
 
-7. **Governance / risk check**
+8. **Governance / risk check**
    - Keep governance visibly separate from the closing synthesis.
    - It should be human-readable, not a compliance spreadsheet.
 
-8. **Final synthesis**
+9. **Final synthesis**
    - Close with a friendlier landing point.
    - Recommendation should be plain-language and decision-useful.
 
@@ -156,6 +177,7 @@ The current visible shape is:
 - emerging threads
 - ideas worth carrying forward
 - debate
+- quick recap
 - risk check
 - what we landed on
   - shared ground
@@ -174,6 +196,7 @@ These are deliberate and should not be casually reversed:
 - **`Risk Check` should be normal bullet points, not a table**
 - **Do not print visible `Round 1 / Round 2 / Round 3` labels**
 - **The closing synthesis should be warmer and clearer than the debate itself**
+- **The block after Debate must be copy-ready enough to stand on its own when pasted elsewhere**
 
 ### Tone rules
 
@@ -210,14 +233,20 @@ Use this map when you need to change behavior.
 ### Reusable templates
 - `src/prompts/templates/`
 
-### Generated runtime
+### Generated runtime family
 - `khon-v1/commands/khon-party.md`
+- `plugins/khon-party/skills/more/SKILL.md`
+- `plugins/khon-party/skills/max/SKILL.md`
+
+### Plugin metadata
+- `.claude-plugin/marketplace.json`
+- `plugins/khon-party/.claude-plugin/plugin.json`
 
 ### Install / verify scripts
-- `install.sh` — local/source install
-- `install-remote.sh` — one-command remote install
-- `verify-install.sh` — install integrity checks
-- `uninstall.sh` — uninstall + restore backup if available
+- `install.sh` — local/source install for the full command family using a local marketplace source
+- `install-remote.sh` — one-command remote install for the full command family using downloaded marketplace/plugin files
+- `verify-install.sh` — install integrity checks for the installed base command, installed plugin state, and generated plugin source
+- `uninstall.sh` — uninstall + restore backup for the full command family
 
 ### Public-facing docs
 - `README.md`
@@ -227,7 +256,7 @@ Use this map when you need to change behavior.
 
 ## 7. Install and release model
 
-There are two supported install paths.
+There are two supported install paths plus one local plugin development path.
 
 ### A. Remote install (recommended for normal users)
 
@@ -238,11 +267,15 @@ curl -fsSL https://raw.githubusercontent.com/Ima8/khon-party/main/install-remote
 ```
 
 This path:
-- downloads the prebuilt runtime from GitHub
+- downloads the prebuilt base runtime from GitHub
 - downloads the verifier
-- validates the downloaded file
+- downloads the generated marketplace/plugin bundle from GitHub
+- validates the downloaded base command before install
 - installs it into `~/.claude/commands/khon-party.md`
-- validates the installed file again
+- registers the downloaded marketplace in user scope
+- installs `khon-party@khon-party` in user scope
+- validates the installed base command, installed marketplace/plugin state, and downloaded plugin bundle
+- leaves `/khon-party`, `/khon-party:more`, and `/khon-party:max` ready after restart or `/reload-plugins`
 
 This path should remain simple and not require `python3`.
 
@@ -256,17 +289,25 @@ This path is for editing the source and rebuilding locally:
 
 This path:
 - runs `python3 scripts/build_runtime.py`
-- generates `khon-v1/commands/khon-party.md`
-- installs it locally
+- generates the full runtime family
+- installs the base command locally
+- registers the checkout as a local marketplace source
+- installs `khon-party@khon-party` in user scope
 - runs `./verify-install.sh`
+
+### C. Local plugin loading path
+
+For unpublished local changes, development and local testing can still use:
+
+```bash
+claude --plugin-dir /path/to/khon-party/plugins/khon-party
+```
+
+Do not instruct people to write into Claude plugin cache directories directly.
 
 ### Release logic
 
-The public artifact is the generated runtime file in the repo:
-
-```text
-khon-v1/commands/khon-party.md
-```
+The public generated artifacts are the base command plus plugin metadata and namespaced skills in the repo.
 
 If you change behavior in `src/`, you must rebuild before release.
 
@@ -289,7 +330,7 @@ These are the easiest ways to accidentally damage the project.
    - Default mode should still widen first.
 
 5. **Do not skip rebuilds after prompt changes**
-   - Changes under `src/` do nothing until the runtime is rebuilt.
+   - Changes under `src/` do nothing until the runtime family is rebuilt.
 
 6. **Do not forget install verification**
    - After install or release changes, run verification again.
@@ -309,14 +350,18 @@ When you modify behavior, follow this checklist.
 2. rebuild with `python3 scripts/build_runtime.py`
 3. reinstall locally with `./install.sh`
 4. run `./verify-install.sh`
-5. smoke test `/khon-party` in Claude Code
-6. review the visible output shape
+5. smoke test `/khon-party`
+6. run `/reload-plugins` or restart Claude Code, then smoke test `/khon-party:more` and `/khon-party:max`
+7. if testing unpublished local changes, `claude --plugin-dir ...` is still a useful shortcut
+8. review the visible output shape
 
 ### If you change install flow or packaging
 1. test `install.sh`
 2. test `install-remote.sh`
 3. re-run `./verify-install.sh`
-4. update `README.md` and install docs if needed
+4. confirm `claude plugin marketplace list --json` and `claude plugin list --json` show the expected installed state
+5. if testing unpublished local changes, optionally test `claude --plugin-dir ...`
+6. update `README.md` and install docs if needed
 
 ### If you change public-facing messaging
 1. update `README.md`
@@ -324,7 +369,7 @@ When you modify behavior, follow this checklist.
 3. make sure public docs do not drift from actual install/release flow
 
 ### Before publishing
-1. confirm generated runtime is up to date
+1. confirm generated runtime family is up to date
 2. confirm docs are consistent
 3. confirm install scripts work
 4. confirm no secrets or local-only references leaked into the repo

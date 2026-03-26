@@ -1,7 +1,7 @@
 ---
 skill_id: khon-party-orchestrator
 name: Party Orchestrator
-description: Maintainer-facing reference skill for the khon-party command behavior
+description: Maintainer-facing reference skill for the khon-party command family behavior
 version: 1.0.0
 module: khon
 ---
@@ -30,10 +30,12 @@ Cross-functional orchestration layer for analysis, planning, review, and decisio
 
 ## Runtime truth
 
-The installed runtime is:
+The generated runtime family is:
 
 ```text
 khon-v1/commands/khon-party.md
+plugins/khon-party/skills/more/SKILL.md
+plugins/khon-party/skills/max/SKILL.md
 ```
 
 This skill file is reference material for maintainers only.

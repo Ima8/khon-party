@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-This repo packages a standalone Claude Code command.
+This repo packages a Claude Code command family.
 
 ## Core rule
 
@@ -28,7 +28,8 @@ This repo packages a standalone Claude Code command.
 ## Install target
 
 - `~/.claude/commands/khon-party.md`
+- namespaced commands are installed through Claude Code's marketplace/plugin flow
 
 ## Verification
 
-- `./verify-install.sh` validates the installed command after `./install.sh`.
+- `./verify-install.sh` validates the installed base command, installed plugin state, and generated plugin artifacts after `./install.sh`.

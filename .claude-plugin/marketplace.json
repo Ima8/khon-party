@@ -1,0 +1,17 @@
+{
+  "name": "khon-party",
+  "owner": {
+    "name": "Issaret Prachitmutita",
+    "email": "imac.monochrome@gmail.com"
+  },
+  "metadata": {
+    "description": "KHON Party marketplace metadata for the namespaced Claude Code plugin variants."
+  },
+  "plugins": [
+    {
+      "name": "khon-party",
+      "source": "./plugins/khon-party",
+      "description": "Adds /khon-party:more and /khon-party:max from the shared KHON Party runtime."
+    }
+  ]
+}
