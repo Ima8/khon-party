@@ -5,6 +5,7 @@ CLAUDE_DIR="${HOME}/.claude"
 COMMANDS_DIR="${CLAUDE_DIR}/commands"
 TARGET_FILE="${COMMANDS_DIR}/khon-party.md"
 BACKUP_DIR="${CLAUDE_DIR}/backups/khon-party"
+INSTALL_DIR="${KHON_PARTY_INSTALL_DIR:-${CLAUDE_DIR}/marketplaces/khon-party}"
 MARKETPLACE_NAME="khon-party"
 PLUGIN_NAME="khon-party"
 PLUGIN_ID="${PLUGIN_NAME}@${MARKETPLACE_NAME}"
@@ -48,6 +49,13 @@ else
   info "No configured khon-party marketplace found"
 fi
 
+if [ -d "${INSTALL_DIR}" ]; then
+  rm -rf "${INSTALL_DIR}"
+  ok "Removed marketplace bundle at ${INSTALL_DIR}"
+else
+  info "No marketplace bundle found at ${INSTALL_DIR}"
+fi
+
 if [ -d "${BACKUP_DIR}" ]; then
   LATEST_BACKUP="$(ls -1t "${BACKUP_DIR}" 2>/dev/null | head -n 1 || true)"
   if [ -n "${LATEST_BACKUP}" ]; then
@@ -64,6 +72,7 @@ What this removed:
 - the base command installed at ~/.claude/commands/khon-party.md
 - the user-scope plugin khon-party@khon-party when present
 - the configured khon-party marketplace when present
+- the synced marketplace bundle at ~/.claude/marketplaces/khon-party when present
 
 What this did not remove:
 - generated plugin source files in this repo
